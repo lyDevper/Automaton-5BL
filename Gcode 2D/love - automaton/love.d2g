@@ -1,0 +1,12 @@
+# +~+~+~ DXF2GCODE project file V1.2 ~+~+~+
+d2g.file = "D:/Gcode 2D/love - automaton/love.dxf"
+d2g.point_tol = 0.0002
+d2g.fitting_tol = 0.0002
+d2g.scale = 1.0
+d2g.rot = 0.0
+d2g.wpzero_x = 0.0
+d2g.wpzero_y = 0.0
+d2g.split_lines = False
+d2g.aut_cut_com = False
+d2g.machine_type = "milling"
+d2g.layers = [{'name': 'Layer 2', 'tool_nr': 1, 'diameter': 2.0, 'speed': 6000.0, 'start_radius': 0.2, 'retract': 15.0, 'safe_margin': 3.0, 'shapes': [{'hash_': '82debdb069c6d59e11ad5eb88e0fe296780b5699', 'cut_cor': 40, 'cw': True, 'send_to_TSP': False, 'disabled': False, 'start_mill_depth': 0.0, 'slice_depth': -1.5, 'mill_depth': -3.0, 'f_g1_plane': 400.0, 'f_g1_depth': 150.0, 'start_x': -39.92246099964438, 'start_y': 2.0246244264669038}]}]
