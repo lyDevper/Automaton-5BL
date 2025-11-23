@@ -1,3 +1,7 @@
+## To run
+To run for each path data (.json) in folder PathData/
+, change the variale NAME in section "Import Path Data" and run all
+
 
 ## Automaton5BL_Project_local.ipynb
 
