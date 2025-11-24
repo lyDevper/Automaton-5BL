@@ -2,6 +2,10 @@
 To run for each path data (.json) in folder PathData/
 , change the variale NAME in section "Import Path Data" and run all
 
+### Note
+The path design including SVG (illustrator), g-code, and json path data are stored in each folder inside 'Gcode 2D'/.
+The g-code is generated using "dfx2gcode" software.
+
 
 ## Automaton5BL_Project_local.ipynb
 
