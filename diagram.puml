@@ -1,0 +1,82 @@
+@startuml
+' title Automaton 5BL Kinematics Class Diagram
+
+' Kinematics and Trajectory Classes
+class FiveBL_Kinema {
+  - d: float = 0.0 # base link distance
+  - l1: float = 15.0
+  - l2: float = 15.0
+  - l3: float = 15.0
+  - l4: float = 15.0
+  --
+  + inversePosition(x, y): tuple<float, float>
+  # find_circle_intersection(x1, y1, x2, y2, r1, r2): tuple<float, float>
+  + forwardPosition(q1, q2): tuple<float, float>
+}
+
+class Cam_Kinema {
+  - l_follower: float = 10.0
+  - ang_offset: float
+  - a: float = 10.5 # dist base to cam center
+  --
+  - invertFollower1(psi, phi_cam): tuple<float, float>
+  - invertFollower2(psi, phi_cam): tuple<float, float>
+  + get_r1_from_q1(q1, phi_cam=0): tuple<float, float>
+  + get_r2_from_q2(q2, phi_cam=0): tuple<float, float>
+}
+
+class TaskTrajectory {
+  - pathPoints: list<Point>
+  - pathLenght: float
+  - phi_end: float
+  - dp_per_dphi: float
+  --
+  + setPathPoints(pathPoints): None
+  + get_p_at_phi(phi_cam): Point
+}
+
+' Main Orchestration Class
+class Automaton {
+  - ws_x: float = 0.0
+  - ws_y: float = 18.0
+  + cam_profile1: list<CamProfileData>
+  + cam_profile2: list<CamProfileData>
+  + jointsTraject_data: list<JointSpaceData>
+  --
+  + IK_taskPoint_to_camProfile(x, y, phi_cam): tuple<CamProfileData, CamProfileData>
+  + generateCamProfile(taskTrajectory, numPoints): tuple<list<CamProfileData>, list<CamProfileData>>
+}
+
+' Data Classes
+class Point <<dataclass>> {
+  + x: float = 0
+  + y: float = 0
+}
+
+class CamProfileData <<dataclass>> {
+  + phi_cam: float = 0
+  + x: float = 0
+  + y: float = 0
+}
+
+class JointSpaceData <<dataclass>> {
+  + phi_cam: float = 0
+  + q1: float = 0
+  + q2: float = 0
+}
+
+' Relationships
+' TaskTrajectory holds a list of Points (Composition)
+TaskTrajectory "1" *-- "many" Point : contains
+
+' Automaton uses TaskTrajectory in its main method (Dependency)
+Automaton ..> TaskTrajectory : uses
+
+' Automaton produces CamProfileData and JointSpaceData (Composition/Association)
+Automaton "1" *-- "many" CamProfileData : contains
+Automaton "1" *-- "many" JointSpaceData : contains
+
+' Automaton depends on Kinematic classes (Dependency)
+Automaton ..> FiveBL_Kinema : uses
+Automaton ..> Cam_Kinema : uses
+@enduml
